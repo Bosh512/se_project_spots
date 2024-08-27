@@ -13,7 +13,7 @@ The project was created using HTML and CSS code, browser dev tools, as well as F
 - [Spots](#spots)
 - [How To Use Spots](#how-to-use-spots)
 - [Figma](#figma-and-credits)
-- [Github Link](#github-link)
+- [Link](#links)
 
 ### How To Use Spots
 
@@ -36,7 +36,9 @@ This project was created with the help of a dev tool software called figma, whic
 
 - [Link to the project on Figma](https://www.figma.com/file/BBNm2bC3lj8QQMHlnqRsga/Sprint-3-Project-%E2%80%94-Spots?type=design&node-id=2%3A60&mode=design&t=afgNFybdorZO6cQo-1)
 
-### Github Link
+### Links
+
+[Project Link](https://Bosh512.github.io/se_project_spots)
 
 [link to Github](https://github.com/Bosh512/se_project_spots)
 [link to Video about Spots](https://drive.google.com/file/d/1BpZferw6diL9-pOeQKIF9ZSKLEvmj_0f/view?usp=sharing)

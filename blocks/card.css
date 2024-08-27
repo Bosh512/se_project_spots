@@ -20,16 +20,21 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 380px;
+  max-width: 350px;
 }
 
 .card__like-button {
   background-image: url(../images/heart.svg);
+  background-size: cover;
+  background-position: center;
   width: 23px;
   height: 20px;
   border: none;
   background-color: transparent;
   opacity: 70%;
+  cursor: pointer;
+  padding: 0;
+  margin: 12px 0 0 0;
 }
 .card__like-button:hover {
   opacity: 100%;
