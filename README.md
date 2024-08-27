@@ -4,7 +4,7 @@
 
 Spots is an interactive social media web application that allows users to upload photos and alter bodies of text to create expressive portfolios or exhibitions of content, as well as like photos uploaded by other users. Spots is configured for mulitple different browsers and devices. As it stands now, the project is simply a foundation, but once the project is fully functional, it should allow for even greater user customization and personalization!
 
-The project was created using HTML and CSS code, browser dev tools, as well as Figma, a third party dev tool software.
+The project was created using HTML and CSS code, browser dev tools, as well as Figma, a third party dev tool software. It is organized and formatted using BEM methodology.
 
 [screenshot](<images/Screenshot%20(508).png>)
 
@@ -38,4 +38,7 @@ This project was created with the help of a dev tool software called figma, whic
 
 ### Github Link
 
-[Link to Github](https://github.com/Bosh512/se_project_spots)
+[link to Github](https://github.com/Bosh512/se_project_spots)
+[link to Video about Spots](https://drive.google.com/file/d/1BpZferw6diL9-pOeQKIF9ZSKLEvmj_0f/view?usp=sharing)
+
+Apologies for the background noise I do not live alone and my microphone is very sensitive.
