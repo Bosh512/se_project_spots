@@ -39,6 +39,7 @@
   background-color: white;
   background-image: url(../images/Close\ Icon.svg);
   background-size: cover;
+  cursor: pointer;
 }
 
 .modal__title {
