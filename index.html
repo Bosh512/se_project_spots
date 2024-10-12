@@ -43,6 +43,7 @@
             <template id="card-template">
               <li class="card">
                 <img src="" alt="" class="card__image" />
+                <button type="button" class="card__delete-button"></button>
                 <div class="card__content">
                   <h2 class="card__title"></h2>
                   <button type="button" class="card__like-button"></button>
@@ -116,7 +117,7 @@
                 <h2 class="card__title">Mountain house</h2>
                 <button type="button" class="card__like-button"></button>
               </div>
-            </li> -->
+            </li> now accessed via javascript  CG    -->
           </ul>
         </section>
       </main>
@@ -135,6 +136,7 @@
                 type="text"
                 class="modal__input"
                 placeholder="type your name"
+                name="name"
               />
             </label>
             <label for="profile-description-input" class="modal__label">
@@ -144,11 +146,51 @@
                 type="text"
                 class="modal__input"
                 placeholder="describe yourself"
+                name="description"
               />
             </label>
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
         </div>
+      </div>
+      <div class="modal" id="card-modal">
+        <div class="modal__container">
+          <button type="button" class="modal__close-button"></button>
+          <h2 class="modal__title">New post</h2>
+          <form name="edit-profile" class="modal__form">
+            <label for="card-link-input" class="modal__label">
+              Image link
+              <input
+                id="card-link-input"
+                type="url"
+                class="modal__input"
+                placeholder="paste a link to the picture"
+                name="link"
+              />
+            </label>
+            <label for="card-caption-input" class="modal__label">
+              Caption
+              <input
+                id="card-caption-input"
+                type="text"
+                class="modal__input"
+                placeholder="type your caption"
+                name="name"
+              />
+            </label>
+            <button type="submit" class="modal__submit-button">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="preview-modal">
+      <div class="modal__container modal__container_type_preview">
+        <button
+          type="button"
+          class="modal__close-button modal__close-button_type_preview"
+        ></button>
+        <img src="" alt="" class="modal__image" />
+        <p class="modal__preview_caption"></p>
       </div>
     </div>
     <script defer src="./scripts/index.js"></script>

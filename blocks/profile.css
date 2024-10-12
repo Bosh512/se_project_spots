@@ -71,6 +71,7 @@
   font-weight: 500;
   line-height: 1;
   text-align: left;
+  transition: 0.3s;
 }
 
 .profile__edit-button:hover {
@@ -96,6 +97,7 @@
   font-weight: 500;
   line-height: 1;
   color: #fcf5e5;
+  transition: 0.3s;
 }
 
 .profile__add-button:hover {

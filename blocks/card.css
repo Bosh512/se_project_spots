@@ -1,6 +1,7 @@
 /* imported! */
 
 .card {
+  position: relative;
 }
 
 .card__content {
@@ -16,7 +17,6 @@
   font-weight: 500;
   line-height: 1.2;
   text-align: left;
-
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -24,20 +24,51 @@
 }
 
 .card__like-button {
-  background-image: url(../images/heart.svg);
+  background-image: url(../images/Union.svg);
   background-size: cover;
   background-position: center;
   width: 23px;
   height: 20px;
   border: none;
   background-color: transparent;
-  opacity: 70%;
+  opacity: 40%;
   cursor: pointer;
   padding: 0;
   margin: 12px 0 0 0;
+  transition: 0.3s;
 }
+
 .card__like-button:hover {
   opacity: 100%;
+}
+
+.card__like-button_liked {
+  background-image: url(../images/union-liked.svg);
+}
+
+.card__like-button_liked:hover {
+  background-image: url(../images/union-liked-hover.svg);
+}
+
+.card__delete-button {
+  background-image: url(../images/can.png);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: 0.3s;
+}
+
+.card__delete-button:hover {
+  background-image: url(../images/can\ hover.png);
 }
 
 .card__image {
@@ -45,6 +76,10 @@
   height: 413px;
   display: block;
   border-radius: 8px;
+}
+
+.card__image:hover {
+  cursor: pointer;
 }
 
 @media screen and (max-width: 627px) {
