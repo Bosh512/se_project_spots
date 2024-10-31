@@ -128,7 +128,7 @@
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
           <h2 class="modal__title">Edit profile</h2>
-          <form name="edit-profile" class="modal__form">
+          <form name="edit-profile" class="modal__form form">
             <label for="profile-name-input" class="modal__label">
               Name
               <input
@@ -137,8 +137,14 @@
                 class="modal__input"
                 placeholder="type your name"
                 name="name"
+                required
+                minlength="2"
+                maxlength="40"
               />
             </label>
+            <span id="profile-name-input-error" class="modal__error"></span>
+              <!--Please fill out this field. -->
+            </span>
             <label for="profile-description-input" class="modal__label">
               Description
               <input
@@ -147,8 +153,15 @@
                 class="modal__input"
                 placeholder="describe yourself"
                 name="description"
+                required
+                minlength="2"
+                maxlength="200"
               />
             </label>
+            <span id="profile-description-input-error" class="modal__error">
+              <!-- Please lengthen this text to 2 characters or more (you are
+              currently using 1 character). -->
+            </span>
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
         </div>
@@ -157,7 +170,7 @@
         <div class="modal__container">
           <button type="button" class="modal__close-button"></button>
           <h2 class="modal__title">New post</h2>
-          <form name="edit-profile" class="modal__form">
+          <form name="edit-profile" class="modal__form form">
             <label for="card-link-input" class="modal__label">
               Image link
               <input
@@ -166,8 +179,12 @@
                 class="modal__input"
                 placeholder="paste a link to the picture"
                 name="link"
+                required
               />
             </label>
+            <span id="card-link-input-error" class="modal__error">
+              <!-- Please enter a URL. --></span
+            >
             <label for="card-caption-input" class="modal__label">
               Caption
               <input
@@ -176,8 +193,14 @@
                 class="modal__input"
                 placeholder="type your caption"
                 name="name"
+                required
+                minlength="2"
+                maxlength="30"
               />
             </label>
+            <span id="card-caption-input-error" class="modal__error">
+              <!-- Please fill out this field. -->
+            </span>
             <button type="submit" class="modal__submit-button">Save</button>
           </form>
         </div>
@@ -193,6 +216,7 @@
         <p class="modal__caption"></p>
       </div>
     </div>
+    <script defer src="./scripts/validation.js"></script>
     <script defer src="./scripts/index.js"></script>
   </body>
 </html>
