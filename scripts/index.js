@@ -51,6 +51,7 @@ const cardModalCloseButton = cardModal.querySelector(".modal__close-button");
 const cardForm = cardModal.querySelector(".modal__form");
 const cardCaptionInput = cardModal.querySelector("#card-caption-input");
 const cardLinkInput = cardModal.querySelector("#card-link-input");
+const cardSubmitButton = cardModal.querySelector(".modal__submit-button");
 const previewModal = document.querySelector("#preview-modal");
 const previewModalImageElement = document.querySelector(".modal__image");
 const previewModalCaption = document.querySelector(".modal__caption");
@@ -69,6 +70,7 @@ function handleCardSubmit(evt) {
   const cardElement = getCardElement(inputValues);
   cardsList.prepend(cardElement);
   evt.target.reset();
+  disableButton(cardSubmitButton, settings);
   closeModal(cardModal);
 }
 
@@ -99,8 +101,8 @@ function getCardElement(data) {
 }
 
 function openModal(modal) {
-  modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEscapeKey);
+  modal.classList.add("modal_opened");
 }
 
 function closeModal(modal) {
@@ -121,19 +123,19 @@ cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
 });
 
-profileEditModal.addEventListener("click", (event) => {
+profileEditModal.addEventListener("mousedown", (event) => {
   if (event.target.classList.contains("modal")) {
     closeModal(profileEditModal);
   }
 });
 
-previewModal.addEventListener("click", (event) => {
+previewModal.addEventListener("mousedown", (event) => {
   if (event.target.classList.contains("modal")) {
     closeModal(previewModal);
   }
 });
 
-cardModal.addEventListener("click", (event) => {
+cardModal.addEventListener("mousedown", (event) => {
   if (event.target.classList.contains("modal")) {
     closeModal(cardModal);
   }
@@ -143,7 +145,7 @@ const handleEscapeKey = (event) => {
   if (event.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
-      closeModal(openModal);
+      closeModal(openedModal);
       document.removeEventListener("keydown", handleEscapeKey);
     }
   }

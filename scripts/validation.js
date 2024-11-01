@@ -37,7 +37,6 @@ const toggleButtonState = (inputList, buttonElement, config) => {
     enableButton(buttonElement, config);
   }
 };
-// my button for the card modal did not remain toggled to enabled after a valid submission CG
 
 const disableButton = (buttonElement, config) => {
   buttonElement.classList.add(config.inactiveButtonClass);
