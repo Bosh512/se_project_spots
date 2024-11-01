@@ -106,6 +106,7 @@ function openModal(modal) {
 }
 
 function closeModal(modal) {
+  document.removeEventListener("keydown", handleEscapeKey);
   modal.classList.remove("modal_opened");
 }
 
@@ -146,7 +147,6 @@ const handleEscapeKey = (event) => {
     const openedModal = document.querySelector(".modal_opened");
     if (openedModal) {
       closeModal(openedModal);
-      document.removeEventListener("keydown", handleEscapeKey);
     }
   }
 };
