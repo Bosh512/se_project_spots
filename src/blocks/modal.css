@@ -47,7 +47,7 @@
   border: 0;
   margin: 0 0 32px;
   background-color: white;
-  background-image: url(../images/close\ icon\ 2.svg);
+  background-image: url(../images/close2.svg);
   background-size: cover;
   cursor: pointer;
   opacity: 0.4;
@@ -59,7 +59,7 @@
 }
 
 .modal__close-button_type_preview {
-  background-image: url(../images/Close\ Icon\ transparent.svg);
+  background-image: url(../images/closeicontrans.svg);
   top: 0px;
   right: -52.5px;
   background-color: transparent;

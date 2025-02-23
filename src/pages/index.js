@@ -1,5 +1,44 @@
-import { enableValidation, validationConfig } from "./validate.js";
+import "./index.css";
+import {
+  enableValidation,
+  validationConfig,
+  // showInputError,
+  // hideInputError,
+  // hasInvalidInput,
+  // toggleButtonState,
+  disableButton,
+  // enableButton,
+  resetValidation,
+  // setEventListeners,
+  // checkInputValidity,
+} from "../scripts/validate.js";
 
+//card.css
+// import unionSrc from "../images/Union.svg";
+// const unionImage = document.getElementById("union-image");
+// unionImage.src = unionSrc;
+// import unionLikedSrc from "../images/union-liked.svg";
+// const unionLikedImage = document.getElementById("union-liked-image");
+// unionLikedImage.src = unionLikedSrc;
+// import unionLikedHoverSrc from "../images/union-liked-hover.svg";
+// const unionLikedHoverImage = document.getElementById("union-liked-hover-image");
+// unionLikedHoverImage.src = unionLikedHoverSrc;
+// import canSrc from "../images/can.png";
+// const canImage = document.getElementById("can-image");
+// canImage.src = canSrc;
+// import canHoverSrc from "../images/canhover.png";
+// const canHoverImage = document.getElementById("can-hover-image");
+// canHoverImage.src = canHoverSrc;
+
+// //modal.css
+// import closeIconSrc from "../images/close2.svg";
+// const closeIconImage = document.getElementById("close-icon-image");
+// closeIconImage.src = closeIconSrc;
+// import closeIconTransSrc from "../images/closeicontrans.svg";
+// const closeIconTransImage = document.getElementById("close-icon-trans-image");
+// closeIconTransImage.src = closeIconTransSrc;
+
+//FUNCTIONALIY WHERE MODAL CLOSES AFTER CREATIUON OF NEW CARD AS WELL AS EDIT POROFILE BUTTON ARE NOT WOERKING
 const initialCards = [
   {
     name: "Val Thorens",
@@ -72,7 +111,7 @@ function handleCardSubmit(evt) {
   const cardElement = getCardElement(inputValues);
   cardsList.prepend(cardElement);
   evt.target.reset();
-  disableButton(cardSubmitButton, settings);
+  disableButton(cardSubmitButton, validationConfig); //settings
   closeModal(cardModal);
 }
 
@@ -159,7 +198,7 @@ cardForm.addEventListener("submit", handleCardSubmit);
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
   editModalDescriptionInput.value = profileDescription.textContent;
-  resetValidation(profileFormElement, settings);
+  resetValidation(profileFormElement, validationConfig); //settings
   openModal(profileEditModal);
 });
 profileCloseButton.addEventListener("click", () => {

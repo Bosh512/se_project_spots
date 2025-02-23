@@ -38,7 +38,7 @@ const toggleButtonState = (inputList, buttonElement, config) => {
   }
 };
 
-const disableButton = (buttonElement, config) => {
+export const disableButton = (buttonElement, config) => {
   buttonElement.classList.add(config.inactiveButtonClass);
   buttonElement.disabled = true;
 };
@@ -52,7 +52,7 @@ const enableButton = (buttonElement, config) => {
 // invalid submission when the form inputs are filled with valid prexisting data
 // call when modal opened to reset error message and call on event listener
 // (note for myself) CG
-const resetValidation = (formElement, config) => {
+export const resetValidation = (formElement, config) => {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
   );
