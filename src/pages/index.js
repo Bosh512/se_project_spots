@@ -2,73 +2,59 @@ import "./index.css";
 import {
   enableValidation,
   validationConfig,
-  // showInputError,
-  // hideInputError,
-  // hasInvalidInput,
-  // toggleButtonState,
   disableButton,
-  // enableButton,
   resetValidation,
-  // setEventListeners,
-  // checkInputValidity,
 } from "../scripts/validate.js";
+import Api from "../utils/Api.js";
 
-//card.css
-// import unionSrc from "../images/Union.svg";
-// const unionImage = document.getElementById("union-image");
-// unionImage.src = unionSrc;
-// import unionLikedSrc from "../images/union-liked.svg";
-// const unionLikedImage = document.getElementById("union-liked-image");
-// unionLikedImage.src = unionLikedSrc;
-// import unionLikedHoverSrc from "../images/union-liked-hover.svg";
-// const unionLikedHoverImage = document.getElementById("union-liked-hover-image");
-// unionLikedHoverImage.src = unionLikedHoverSrc;
-// import canSrc from "../images/can.png";
-// const canImage = document.getElementById("can-image");
-// canImage.src = canSrc;
-// import canHoverSrc from "../images/canhover.png";
-// const canHoverImage = document.getElementById("can-hover-image");
-// canHoverImage.src = canHoverSrc;
+// const initialCards = [
+//   {
+//     name: "Val Thorens",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
+//   },
+//   {
+//     name: "Restaurant terrace",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
+//   },
+//   {
+//     name: "An outdoor cafe",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
+//   },
+//   {
+//     name: "A very long bridge, over the forest and through the trees",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
+//   },
+//   {
+//     name: "Tunnel with morning light",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
+//   },
+//   {
+//     name: "Mountain house",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
+//   },
+//   {
+//     name: "The Golden Gate Bridge",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
+//   },
+// ];
 
-// //modal.css
-// import closeIconSrc from "../images/close2.svg";
-// const closeIconImage = document.getElementById("close-icon-image");
-// closeIconImage.src = closeIconSrc;
-// import closeIconTransSrc from "../images/closeicontrans.svg";
-// const closeIconTransImage = document.getElementById("close-icon-trans-image");
-// closeIconTransImage.src = closeIconTransSrc;
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "5fb31e3b-65c9-4a67-92d8-0d110ec5189d",
+    "Content-Type": "application/json",
+  },
+});
 
-//FUNCTIONALIY WHERE MODAL CLOSES AFTER CREATIUON OF NEW CARD AS WELL AS EDIT POROFILE BUTTON ARE NOT WOERKING
-const initialCards = [
-  {
-    name: "Val Thorens",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "Restaurant terrace",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  },
-  {
-    name: "An outdoor cafe",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  },
-  {
-    name: "A very long bridge, over the forest and through the trees",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  },
-  {
-    name: "Tunnel with morning light",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  },
-  {
-    name: "Mountain house",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  },
-  {
-    name: "The Golden Gate Bridge",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/7-photo-by-griffin-wooldridge-from-pexels.jpg",
-  },
-];
+api
+  .getAppInfo()
+  .then(([cards]) => {
+    cards.forEach((card) => {
+      const cardElement = getCardElement(card);
+      cardsList.append(cardElement);
+    });
+  })
+  .catch(console.error);
 
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
@@ -206,12 +192,6 @@ profileCloseButton.addEventListener("click", () => {
 });
 previewModalCloseButton.addEventListener("click", () => {
   closeModal(previewModal);
-});
-
-initialCards.forEach((card) => {
-  console.log(card);
-  const cardElement = getCardElement(card);
-  cardsList.append(cardElement);
 });
 
 enableValidation(validationConfig);
