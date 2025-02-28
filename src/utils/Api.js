@@ -7,18 +7,37 @@ class Api {
   }
 
   getAppInfo() {
-    return Promise.all([this.getInitialCards()]);
+    return Promise.all([this.getInitialCards(), this.getUserInfo()]);
+  }
+
+  _response(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._response);
+  }
+
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+    }).then(this._response);
+  }
+
+  editUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then(this._response);
   }
 
   //end of class
@@ -34,3 +53,19 @@ export default Api;
 
 //  baseUrl
 // https://around-api.en.tripleten-services.com/v1
+
+// API endpoints
+// As a reference, we’ve included a list of all the API endpoints you’ll need to write requests for. We’ll explain them in more detail below.
+
+// User routes
+
+// GET /users/me – Get the current user’s info --
+// PATCH /users/me – Update your profile information
+// PATCH /users/me/avatar – Update avatar
+// Card routes
+
+// GET /cards – Get all cards --
+// POST /cards – Create a card
+// DELETE /cards/:cardId – Delete a card
+// PUT /cards/:cardId/likes – Like a card
+// DELETE /cards/:cardId/likes – Dislike a card

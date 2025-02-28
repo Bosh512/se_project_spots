@@ -48,16 +48,22 @@ const api = new Api({
 
 api
   .getAppInfo()
-  .then(([cards]) => {
-    cards.forEach((card) => {
-      const cardElement = getCardElement(card);
+  .then(([cards, userInfo]) => {
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
+    const user = userInfo;
+    //avatar needed
+    //id needed
+    profileName.textContent = user.name;
+    profileDescription.textContent = user.about;
   })
   .catch(console.error);
 
 const profileName = document.querySelector(".profile__name");
 const profileDescription = document.querySelector(".profile__description");
+// const profileAvatar = document.querySelector(".profile_avatar");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditModal = document.querySelector("#edit-modal");
 const profileCloseButton = profileEditModal.querySelector(
@@ -139,9 +145,17 @@ function closeModal(modal) {
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
-  profileName.textContent = editModalNameInput.value;
-  profileDescription.textContent = editModalDescriptionInput.value;
-  closeModal(profileEditModal);
+  api
+    .editUserInfo({
+      name: editModalNameInput.value,
+      about: editModalDescriptionInput.value,
+    })
+    .then((data) => {
+      profileName.textContent = data.name;
+      profileDescription.textContent = data.about;
+      closeModal(profileEditModal);
+    })
+    .catch(console.error);
 }
 
 cardModalButton.addEventListener("click", () => {
