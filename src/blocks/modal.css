@@ -76,8 +76,9 @@
   line-height: 1;
   text-align: left;
 }
-.modal__form {
-}
+
+/* .modal__form {
+} */
 
 .modal__label {
   display: flex;

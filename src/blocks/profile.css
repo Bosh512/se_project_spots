@@ -7,11 +7,51 @@
 }
 /* 66 on hexcode makes border opaque */
 
-.profile__avatar {
+.profile__avatar-container {
+  position: relative;
   margin-right: 20px;
+}
+
+.profile__avatar {
   width: 190px;
   height: 190px;
   border-radius: 8px;
+}
+
+.profile__avatar_edit-button {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  visibility: hidden;
+  border-radius: 8px;
+  border-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* I prefer hexcodes and used them everywhere else but here. For some reason could not get the #80000000 hexcode to be black and not fully transparent. Apologies for lack of consistency. CG*/
+
+  color: #fff;
+  font-family: "Poppins", arial, helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.profile__avatar_button-image {
+  margin: 0 8px 12px 0;
+}
+
+.profile__avatar_edit-button::after {
+  content: "Edit Avatar";
+  margin-bottom: 12px;
+}
+
+.profile__avatar-container:hover .profile__avatar_edit-button {
+  visibility: visible;
+  cursor: pointer;
 }
 
 .profile__column {
@@ -143,5 +183,42 @@
     text-align: center;
     margin: 0;
     width: 100%;
+  }
+
+  .profile__avatar_edit-button {
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+    position: absolute;
+    top: 52px;
+    left: 52px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    visibility: visible;
+    border-radius: 6px;
+    background-color: #21212160;
+    /* I prefer hexcodes and used them everywhere else but here. For some reason could not get the #80000000 hexcode to be black and not fully transparent. Apologies for lack of consistency. CG*/
+
+    color: #fff;
+    font-family: "Poppins", arial, helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .profile__avatar_button-image {
+    margin: 0 0 0 0;
+    gap: 4px;
+  }
+
+  .profile__avatar_edit-button::after {
+    content: "";
+    margin-bottom: 0;
+  }
+
+  .profile__avatar-container:hover .profile__avatar_edit-button {
+    visibility: visible;
+    cursor: pointer;
   }
 }

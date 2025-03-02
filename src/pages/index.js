@@ -91,6 +91,17 @@ const previewModalCaption = document.querySelector(".modal__caption");
 const previewModalCloseButton = document.querySelector(
   ".modal__close-button_type_preview"
 );
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarModalButton = document.querySelector(
+  ".profile__avatar_edit-button"
+);
+const avatarModalCloseButton = avatarModal.querySelector(
+  ".modal__close-button"
+);
+const avatarSubmitButton = avatarModal.querySelector(".modal__submit-button");
+const avatarLinkInput = avatarModal.querySelector("#avatar-link-input");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarImage = document.querySelector(".profile__avatar");
 
 function handleCardSubmit(evt) {
   evt.preventDefault();
@@ -158,11 +169,29 @@ function handleProfileFormSubmit(event) {
     .catch(console.error);
 }
 
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+  api
+    .editAvatarInfo(avatarLinkInput.value)
+    .then((data) => {
+      avatarImage.src = data.avatar;
+      closeModal(avatarModal);
+    })
+    .catch(console.error);
+}
+
 cardModalButton.addEventListener("click", () => {
   openModal(cardModal);
 });
 cardModalCloseButton.addEventListener("click", () => {
   closeModal(cardModal);
+});
+
+avatarModalButton.addEventListener("click", () => {
+  openModal(avatarModal);
+});
+avatarModalCloseButton.addEventListener("click", () => {
+  closeModal(avatarModal);
 });
 
 profileEditModal.addEventListener("mousedown", (event) => {
@@ -183,6 +212,12 @@ cardModal.addEventListener("mousedown", (event) => {
   }
 });
 
+avatarModal.addEventListener("mousedown", (event) => {
+  if (event.target.classList.contains("modal")) {
+    closeModal(avatarModal);
+  }
+});
+
 const handleEscapeKey = (event) => {
   if (event.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
@@ -194,6 +229,7 @@ const handleEscapeKey = (event) => {
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardSubmit);
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 profileEditButton.addEventListener("click", () => {
   editModalNameInput.value = profileName.textContent;
