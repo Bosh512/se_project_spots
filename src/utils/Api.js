@@ -1,5 +1,3 @@
-// utils/Api.js
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -27,6 +25,16 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._response);
+  } // NOT WORKING
+  postNewCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._response);
   }
 
   editUserInfo({ name, about }) {
@@ -47,6 +55,13 @@ class Api {
       body: JSON.stringify({
         avatar,
       }),
+    }).then(this._response);
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
     }).then(this._response);
   }
 
