@@ -6,6 +6,8 @@ import {
   resetValidation,
 } from "../scripts/validate.js";
 import Api from "../utils/Api.js";
+import { setButtonText } from "../utils/helpers.js";
+import { data } from "autoprefixer";
 
 // const initialCards = [
 //   {
@@ -116,6 +118,9 @@ const avatarImage = document.querySelector(".profile__avatar");
 //delete modal elements
 const deleteModal = document.querySelector("#delete-modal");
 const deleteForm = deleteModal.querySelector(".modal__form");
+const deleteModalSubmitButton = deleteModal.querySelector(
+  ".modal__delete-button"
+);
 const deleteModalCancelButton = document.querySelector("#cancel-button");
 const deleteModalCloseButton = deleteModal.querySelector(
   ".modal___close-button_type_delete"
@@ -123,6 +128,9 @@ const deleteModalCloseButton = deleteModal.querySelector(
 
 function handleCardSubmit(evt) {
   evt.preventDefault();
+  const submitButton = evt.submitter;
+  console.log(submitButton);
+  setButtonText(submitButton, true, "Saving...", "Save");
   api
     .postNewCard({
       name: cardCaptionInput.value,
@@ -132,7 +140,10 @@ function handleCardSubmit(evt) {
       cardCaptionInput.textContent = data.name;
       cardLinkInput.src = data.link;
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false, "Saving...", "Save");
+    });
   const inputValues = {
     name: cardCaptionInput.value,
     link: cardLinkInput.value,
@@ -145,24 +156,26 @@ function handleCardSubmit(evt) {
 }
 
 function handleDeleteSubmit(evt) {
-  evt.preventDefault;
+  evt.preventDefault();
+  const submitButton = evt.submitter;
+  setButtonText(submitButton, true, "Deleting...", "Delete");
   api
     .deleteCard(selectedCardId)
     .then(() => {
-      cardElement.remove();
+      selectedCard.remove();
+      console.log("This post has been deleted");
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false, "Deleting...", "Delete");
+    });
 }
 
 function handleDeleteCard(cardElement, cardId) {
   selectedCard = cardElement;
   selectedCardId = cardId;
   openModal(deleteModal);
-}
-
-function handleLikedCard(evt) {
-  evt.target.classList.toggle("card__like-button_liked");
 }
 
 function handlePreview(data) {
@@ -180,15 +193,35 @@ function getCardElement(data) {
   const cardLikeButton = cardElement.querySelector(".card__like-button");
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  const isLiked = cardLikeButton.classList.contains("card__like-button_liked");
   cardNameElement.textContent = data.name;
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
 
-  cardLikeButton.addEventListener("click", handleLikedCard);
-  cardDeleteButton.addEventListener("click", (evt) =>
+  if (data.isLiked) {
+    cardLikeButton.classList.add("card__like-button_liked");
+  } else {
+    cardLikeButton.classList.remove("card__like-button_liked");
+  }
+
+  cardLikeButton.addEventListener("click", (evt) =>
+    handleLikedCard(evt, data._id, data.isLiked)
+  );
+  cardDeleteButton.addEventListener("click", () =>
     handleDeleteCard(cardElement, data._id)
   );
   cardImageElement.addEventListener("click", () => handlePreview(data));
+
+  function handleLikedCard(evt, id, isLiked) {
+    // evt.target.classList.toggle("card__like-button_liked");
+
+    api
+      .changeLikeStatus(id, isLiked)
+      .then(() => {
+        evt.target.classList.toggle("card__like-button_liked");
+      })
+      .catch(console.error);
+  }
 
   return cardElement;
 }
@@ -205,6 +238,9 @@ function closeModal(modal) {
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  const submitButton = evt.submitter;
+  console.log(submitButton);
+  setButtonText(submitButton, true, "Saving...", "Save");
   api
     .editUserInfo({
       name: editModalNameInput.value,
@@ -215,18 +251,27 @@ function handleProfileFormSubmit(evt) {
       profileDescription.textContent = data.about;
       closeModal(profileEditModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false, "Saving...", "Save");
+    });
 }
 
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+  const submitButton = evt.submitter;
+  console.log(submitButton);
+  setButtonText(submitButton, true, "Saving...", "Save");
   api
     .editAvatarInfo(avatarLinkInput.value)
     .then((data) => {
       avatarImage.src = data.avatar;
       closeModal(avatarModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setButtonText(submitButton, false, "Saving...", "Save");
+    });
 }
 
 cardModalButton.addEventListener("click", () => {
@@ -268,10 +313,6 @@ avatarModal.addEventListener("mousedown", (event) => {
 });
 
 deleteModalCloseButton.addEventListener("click", () => {
-  console.log(deleteModal);
-  console.log(deleteForm);
-  console.log(deleteModalCancelButton);
-  console.log(deleteModalCloseButton);
   closeModal(deleteModal);
 });
 
