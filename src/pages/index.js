@@ -56,8 +56,8 @@ api
       cardsList.append(cardElement);
     });
     const user = userInfo;
-    //avatar needed
-    //id needed
+    avatarImage.src = user.avatar;
+
     profileName.textContent = user.name;
     profileDescription.textContent = user.about;
   })
@@ -139,20 +139,23 @@ function handleCardSubmit(evt) {
     .then((data) => {
       cardCaptionInput.textContent = data.name;
       cardLinkInput.src = data.link;
+      // const cardElement = getCardElement(data),
+      // cardsList.prepend(cardElement),
+      // closeModal(cardModal);
+      // const inputValues = {
+      //   name: cardCaptionInput.value,
+      //   link: cardLinkInput.value,
+      // };
+      const cardElement = getCardElement(data);
+      cardsList.prepend(cardElement);
+      evt.target.reset();
+      disableButton(cardSubmitButton, validationConfig); //settings
+      closeModal(cardModal);
     })
     .catch(console.error)
     .finally(() => {
       setButtonText(submitButton, false, "Saving...", "Save");
     });
-  const inputValues = {
-    name: cardCaptionInput.value,
-    link: cardLinkInput.value,
-  };
-  const cardElement = getCardElement(inputValues);
-  cardsList.prepend(cardElement);
-  evt.target.reset();
-  disableButton(cardSubmitButton, validationConfig); //settings
-  closeModal(cardModal);
 }
 
 function handleDeleteSubmit(evt) {

@@ -38,13 +38,14 @@ class Api {
     }).then(this._response);
   }
 
-  editUserInfo({ name, about }) {
+  editUserInfo({ name, about, avatar }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name,
         about,
+        avatar,
       }),
     }).then(this._response);
   }
